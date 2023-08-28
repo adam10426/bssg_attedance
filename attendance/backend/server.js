@@ -1,8 +1,9 @@
 const memberRoutes = require("./routes/members.routes");
 const app = require('./index')
 const db = require("./config/db.config");
+require("dotenv").config()
 
-
+//connecting to local database
 db.connect((err) => {
     if (err) {
         console.log(err)
@@ -15,6 +16,7 @@ db.connect((err) => {
 //routes
 app.use('/member', memberRoutes)
 
-app.listen('3000', () => { 
-    console.log('App is up and running on port 3000')
+const port = process.env.PORT ||  '3000'
+app.listen(port, () => { 
+    console.log(`App is up and running on port ${port}`)
 })
