@@ -3,7 +3,7 @@ const db = new Client({
   user: "bssg",
   host: "localhost",
   database: "attendance",
-  password: "div3",
+  password: "admin",
   port: 5432,
 });
 
