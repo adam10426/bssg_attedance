@@ -1,5 +1,5 @@
 const db = require("../config/db.config");
-const UserNotFound = require('../utils/error.util')
+const {UserNotFound} = require('../utils/error.util')
 
 const getAll = async () => {
     try {
@@ -43,7 +43,7 @@ const updateOne = async (memberId,memberDetails) => {
 const checkUser = async (memberId) => { 
     const record = await db.query(`SELECT name FROM members WHERE user_id = ${memberId}`)
     if (record.rows.length === 0)
-        throw new UserNotFound('No Record Found')   
+        throw new UserNotFound('No User Found')   
 }
 
 
