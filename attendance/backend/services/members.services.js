@@ -3,7 +3,7 @@ const {UserNotFound} = require('../utils/error.util')
 
 const getAll = async () => {
     try {
-        const records = await db.query("SELECT * FROM members");
+        const records = await db.query("SELECT * FROM members WHERE is_deleted=false");
         return records.rows
     }
     catch (err) { 
@@ -39,9 +39,34 @@ const updateOne = async (memberId,memberDetails) => {
         throw err
     }
 }
+
+const removeOne = async (memberdId)=>{
+    try{
+    const query = `UPDATE members SET is_deleted = true WHERE user_id = ${memberdId}`
+    await db.query(query)
+    }
+    catch(err){
+        throw err
+    }
+
+}
+
+const addOne = async(memberDetail) => {
+    try{
+    const query = `INSERT INTO members (name,father_name,last_name,its,contact,email,type,rank,is_deleted)
+    VALUES ('${memberDetail.first_name}','${memberDetail.father_name}','${memberDetail.last_name}',${memberDetail.its},'${memberDetail.contact}','${memberDetail.email}','${memberDetail.type}','${memberDetail.rank}',false);
+    `
+    await db.query(query)
+    
+    }
+    catch(err){
+        throw err
+    }
+}
+
  
 const checkUser = async (memberId) => { 
-    const record = await db.query(`SELECT name FROM members WHERE user_id = ${memberId}`)
+    const record = await db.query(`SELECT name FROM members WHERE user_id = ${memberId} AND is_deleted=false`)
     if (record.rows.length === 0)
         throw new UserNotFound('No User Found')   
 }
@@ -51,5 +76,7 @@ module.exports = {
   getAll,
   getOne,
   updateOne,
-  checkUser,
+  removeOne,
+  addOne,
+  checkUser
 };
