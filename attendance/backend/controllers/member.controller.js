@@ -34,11 +34,34 @@ const updateMember = async (req, res,next) => {
     }
 }
 
+const removeMember = async(req,res,next)=>{
+    try{
+        await memberService.checkUser(req.params.id)
+        await memberService.removeOne(req.params.id)
+        res.status(204).send()
+    }
+    catch(err){
+        next(err)
+    }
+}
+
+const addMember = async(req,res,next)=>{
+    try{
+        const memberDetail = req.body
+        await memberService.addOne(req.body)
+        res.status(200).send(memberDetail)
+    }
+    catch(err){
+        next(err)
+    }
+}
 
 
 
 module.exports = {
   getAllMembers,
   getMember,
-  updateMember
+  updateMember,
+  addMember,
+  removeMember
 };
