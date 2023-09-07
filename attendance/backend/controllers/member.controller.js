@@ -1,5 +1,5 @@
 const db = require('../config/db.config')
-const memberService = require('../services/members.services')
+const memberService = require('../services/members.service')
 
 const getAllMembers = async (req, res,next)=>{ 
     try {
