@@ -1,5 +1,6 @@
 const memberRoutes = require("./routes/members.routes");
 const miqatRoutes = require("./routes/miqat.routes");
+const attendanceRoutes = require("./routes/attendance.routes")
 const app = require('./index')
 const db = require("./config/db.config");
 require("dotenv").config()
@@ -17,6 +18,7 @@ db.connect((err) => {
 //routes
 app.use('/api/member', memberRoutes)
 app.use('/api/miqat',miqatRoutes)
+app.use('/api/attendance',attendanceRoutes)
 
 const port = process.env.PORT ||  '3000'
 app.listen(port, () => { 
