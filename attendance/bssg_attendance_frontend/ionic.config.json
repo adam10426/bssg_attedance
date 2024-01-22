@@ -1,0 +1,7 @@
+{
+  "name": "bssg_attendance_frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
